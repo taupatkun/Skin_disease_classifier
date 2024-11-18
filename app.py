@@ -1,54 +1,42 @@
 import streamlit as st
-import numpy as np
 from PIL import Image
-import io
-from fastbook import *
-from glob import glob
-from pathlib import Path
-from sklearn.metrics import precision_recall_fscore_support, accuracy_score, roc_auc_score
+from fastai.learner import load_learner
+import torch
+import torchvision.transforms as transforms
 
-# Load the trained model
-MODEL_PATH = "Skin_disease.pkl"
+# Set the title of the app
+st.title("Skin disease classifier app")
+st.write("By Teerapat Sittichottithikun")
 
-# Function to load the model
-learn_inf = load_learner('Skin_disease.pkl')
+# Load the FastAI model
+@st.cache_resource
+def load_model():
+    model = load_learner("Skin_disease.pkl")
+    return model
 
-# Function to preprocess the image
-def preprocess_image(image):
-    # Resize image (example size: 224x224 for many neural networks)
-    image = image.resize((224, 224))
-    # Convert image to numpy array and scale to [0, 1]
-    image = np.array(image) / 255.0
-    # Add a batch dimension if needed (1, 224, 224, 3)
-    image = np.expand_dims(image, axis=0)
-    return image
+model = load_model()
 
-# Main Streamlit app
-def main():
-    st.title("Skin disease Classification App")
-    st.write("Upload an image and the model will classify it.")
-    st.write("By Teerapat Sittichottithikun")
+# Define image transformations (optional, depending on your model)
+transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor()
+])
 
-    # Upload image
-    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+# File uploader widget
+uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
-    if uploaded_file is not None:
-        # Display uploaded image
-        image = Image.open(uploaded_file)
-        st.image(image, caption="Uploaded Image", use_column_width=True)
+if uploaded_file is not None:
+    # Open the uploaded image
+    image = Image.open(uploaded_file)
 
-        # Load the model
-        model = load_model()
+    # Display the image
+    st.image(image, caption="Uploaded Image", use_column_width=True)
 
-        # Preprocess the image
-        processed_image = preprocess_image(image)
+    # Make prediction using FastAI's model
+    pred, pred_idx, probs = model.predict(image)
 
-        # Make prediction
-        prediction = model.predict(processed_image)
-        predicted_class = np.argmax(prediction, axis=1)[0]
-
-        # Display the result
-        st.write(f"Predicted Class: {predicted_class}")
-
-if __name__ == "__main__":
-    main()
+    # Display the prediction
+    st.write(f"Prediction: **{pred}**")
+    st.write(f"Probability: **{probs[pred_idx]:.4f}**")
+else:
+    st.write("Please upload an image.")

@@ -1,18 +1,16 @@
 import streamlit as st
 import numpy as np
-import pickle
 from PIL import Image
-import io
+import iofrom fastbook import *
+from glob import glob
+from pathlib import Path
+from sklearn.metrics import precision_recall_fscore_support, accuracy_score, roc_auc_score
 
 # Load the trained model
 MODEL_PATH = "Skin_disease.pkl"
 
 # Function to load the model
-@st.cache_resource
-def load_model():
-    with open(MODEL_PATH, "rb") as f:
-        model = pickle.load(f)
-    return model
+learn_inf = load_learner('Skin_disease.pkl')
 
 # Function to preprocess the image
 def preprocess_image(image):

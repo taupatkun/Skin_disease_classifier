@@ -6,6 +6,8 @@ from fastbook import *
 from glob import glob
 from pathlib import Path
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score, roc_auc_score
+import fastai
+fastai.setup_book()
 
 # Load the trained model
 MODEL_PATH = "Skin_disease.pkl"

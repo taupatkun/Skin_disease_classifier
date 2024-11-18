@@ -1,7 +1,8 @@
 import streamlit as st
 import numpy as np
 from PIL import Image
-import iofrom fastbook import *
+import io
+from fastbook import *
 from glob import glob
 from pathlib import Path
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score, roc_auc_score

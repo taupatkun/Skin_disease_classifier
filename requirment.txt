@@ -1,2 +1,3 @@
-install streamlit pillow and opencv-python
-insatll model
+streamlit
+Pillow
+opencv-python

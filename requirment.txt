@@ -1,0 +1,2 @@
+install streamlit pillow and opencv-python
+insatll model

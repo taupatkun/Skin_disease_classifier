@@ -5,7 +5,8 @@ import torch
 import torchvision.transforms as transforms
 
 # Set the title of the app
-st.title("FastAI Model Image Prediction App")
+st.title("Skin disease prediction app")
+st.write("by Teerapat Sittichottithikun")
 
 # Load the FastAI model
 @st.cache_resource

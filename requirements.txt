@@ -1,5 +1,5 @@
-streamlit
-Pillow
-opencv-python
-fastai
-tourch
+streamlit == 1.40.1
+Pillow == 11.0.0
+opencv-python == 3.1.5
+fastai == 2.7.18
+tourch == 2.5.1

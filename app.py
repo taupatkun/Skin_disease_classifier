@@ -9,11 +9,11 @@ import torchvision
 import PIL
 import os
 
-#*st.write("Python:", sys.version)
-#st.write("PyTorch:", torch.__version__)
-#st.write("Torchvision:", torchvision.__version__)
-#st.write("fastai:", fastai.__version__)
-#st.write("Pillow:", PIL.__version__)
+st.write("Python:", sys.version)
+st.write("PyTorch:", torch.__version__)
+st.write("Torchvision:", torchvision.__version__)
+st.write("fastai:", fastai.__version__)
+st.write("Pillow:", PIL.__version__)
 # =========================================================
 # PAGE CONFIGURATION
 # =========================================================

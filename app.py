@@ -181,10 +181,13 @@ def load_model():
         cpu=True
     )
     return model
+import traceback
+
 try:
     model = load_model()
-except Exception as e:
-    st.error(f"Error loading model: {e}")
+except Exception:
+    st.error("Error loading model:")
+    st.code(traceback.format_exc())
     st.stop()
 # =========================================================
 # IMAGE UPLOADER

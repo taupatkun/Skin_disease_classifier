@@ -176,13 +176,23 @@ disease_info = {
 # =========================================================
 @st.cache_resource
 def load_model():
+    import pickle
+
+    # Test 1: ตรวจว่า pickle โหลดได้ไหม
+    with open("Skin_disease.pkl", "rb") as f:
+        try:
+            obj = pickle.load(f)
+            st.write("Pickle test:", type(obj))
+        except Exception as e:
+            st.error(f"Pickle test failed: {e}")
+            raise
+
+    # Test 2: โหลดด้วย fastai
     model = load_learner(
         "Skin_disease.pkl",
         cpu=True
     )
     return model
-import traceback
-
 try:
     model = load_model()
 except Exception:

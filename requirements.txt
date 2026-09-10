@@ -1,5 +1,5 @@
 fasttransform==0.0.2
-pillow==11.3.0
+pillow==10.4.0
 cloudpickle
 streamlit
 fastai==2.8.8

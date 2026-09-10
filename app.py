@@ -176,7 +176,6 @@ def load_model():
     import fastai
     import fasttransform
     import PIL
-    import cloudpickle
     import sys
 
     st.write("=== ENVIRONMENT ===")
@@ -192,7 +191,6 @@ def load_model():
     model = load_learner(
         "Skin_disease.pkl",
         cpu=True,
-        pickle_module=cloudpickle
     )
 
     st.write("SUCCESS:", type(model))

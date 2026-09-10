@@ -8,6 +8,7 @@ import fastai
 import torchvision
 import PIL
 import os
+import traceback
 
 st.write("Python:", sys.version)
 st.write("PyTorch:", torch.__version__)

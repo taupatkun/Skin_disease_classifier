@@ -176,22 +176,12 @@ disease_info = {
 # =========================================================
 @st.cache_resource
 def load_model():
-    import pickle
-
-    # Test 1: ตรวจว่า pickle โหลดได้ไหม
-    with open("Skin_disease.pkl", "rb") as f:
-        try:
-            obj = pickle.load(f)
-            st.write("Pickle test:", type(obj))
-        except Exception as e:
-            st.error(f"Pickle test failed: {e}")
-            raise
-
-    # Test 2: โหลดด้วย fastai
-    model = load_learner(
+    model = torch.load(
         "Skin_disease.pkl",
-        cpu=True
+        map_location="cpu",
+        weights_only=False
     )
+    st.write("Model type:", type(model))
     return model
 try:
     model = load_model()

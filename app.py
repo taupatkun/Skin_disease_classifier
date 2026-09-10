@@ -184,7 +184,6 @@ def load_model():
     st.write("FastAI:", fastai.__version__)
     st.write("FastTransform:", fasttransform.__version__)
     st.write("Pillow:", PIL.__version__)
-    st.write("Cloudpickle:", cloudpickle.__version__)
 
     st.write("=== LOADING MODEL ===")
 

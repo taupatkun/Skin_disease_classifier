@@ -177,10 +177,11 @@ disease_info = {
 # =========================================================
 @st.cache_resource
 def load_model():
-    model = torch.load(
+    # Skin_disease.pkl is a FastAI exported Learner.
+    # It must be loaded with fastai.load_learner(), not torch.load().
+    model = load_learner(
         "Skin_disease.pkl",
-        map_location="cpu",
-        weights_only=False
+        cpu=True
     )
     st.write("Model type:", type(model))
     return model

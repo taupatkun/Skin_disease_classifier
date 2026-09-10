@@ -177,10 +177,31 @@ disease_info = {
 # =========================================================
 @st.cache_resource
 def load_model():
+    import torch
+    import fastai
+    import fasttransform
+    import PIL
+    import cloudpickle
+    import sys
+
+    st.write("=== ENVIRONMENT ===")
+    st.write("Python:", sys.version)
+    st.write("PyTorch:", torch.__version__)
+    st.write("FastAI:", fastai.__version__)
+    st.write("FastTransform:", fasttransform.__version__)
+    st.write("Pillow:", PIL.__version__)
+    st.write("Cloudpickle:", cloudpickle.__version__)
+
+    st.write("=== LOADING MODEL ===")
+
     model = load_learner(
         "Skin_disease.pkl",
-        cpu=True
+        cpu=True,
+        pickle_module=cloudpickle
     )
+
+    st.write("SUCCESS:", type(model))
+
     return model
 try:
     model = load_model()
